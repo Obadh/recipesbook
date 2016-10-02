@@ -1,0 +1,15 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+
+{{# each items }}
+
+    <h3>{{ this.name }} </h3>
+
+    <h3>{{ this.cat }} </h3>
+
+    <img alt="User Pic" src="{{ this.pic }}" class="img-responsive" width="480px" height="580px">
+
+
+
+{{/each}}
