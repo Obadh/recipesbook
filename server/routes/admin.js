@@ -13,23 +13,7 @@ router.get('/', function(req, res, next) {
   res.render('admin', { title: 'my admin page', layout: 'layout_admin' });
 });
 
-//
-// router.get('/get-data', function(req, res, next) {
-//   var resultArray = [];
-//   mongo.connect(url, function(err, db) {
-//     assert.equal(null, err);
-//     var cursor = db.collection('ingredients').find();
-//     cursor.forEach(function(doc, err) {
-//       assert.equal(null, err);
-//       resultArray.push(doc);
-//     }, function() {
-//       db.close();
-//       // var output = resultArray.filter(function(x){return x.cat_id == 1});
-//       res.render('admin', {items: resultArray});
-//
-//     });
-//   });
-// });
+
 
 
 router.post('/recipe', function(req, res, next) {
@@ -64,9 +48,9 @@ router.post('/ingredients', function(req, res, next) {
 
 
     var item = {
-        name: req.body.name,
-        image: req.body.image,
-        category: req.body.category,
+        name: req.body.name_ingredients,
+        image: req.body.image_ingredients,
+        category: req.body.category_ingredients,
     };
   console.log(req.body.name);
     mongo.connect(url, function (err, db) {

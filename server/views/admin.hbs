@@ -58,21 +58,21 @@
                     <label>
                         the Name<span class="req">*</span>
                     </label>
-                    <input type="text"required autocomplete="off" name="name"/>
+                    <input type="text"required autocomplete="off" name="name_ingredients"/>
                 </div>
 
                 <div class="field-wrap">
                     <label>
                         category<span class="req">*</span>
                     </label>
-                    <input type="text"required autocomplete="off" name="category"/>
+                    <input type="text"required autocomplete="off" name="category_ingredients"/>
                 </div>
 
                 <div class="field-wrap">
                     <label>
                         Uplaod Image<span class="req">*</span>
                     </label>
-                    <input type="text"required autocomplete="off" name="image"/>
+                    <input type="text"required autocomplete="off" name="image_ingredients"/>
                 </div>
 
                 <p class="forgot"><a href="#">Forgot Password?</a></p>
@@ -105,17 +105,6 @@
 
 
 
-
-{{# each items }}
-
-    <h3>{{ this.name }} </h3>
-
-    <h3>{{ this.cat }} </h3>
-
-    <img alt="User Pic" src="{{ this.pic }}" class="img-responsive">
-
-
-{{/each}}
 
 
 
