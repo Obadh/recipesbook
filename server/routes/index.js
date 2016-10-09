@@ -7,16 +7,18 @@ var assert = require('assert');
 var url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' , layout: 'layout_admin' });
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index', { title: 'Express' , layout: 'layout_admin' });
+// });
 
 module.exports = router;
 
 
 
-router.get('/get-data', function(req, res, next) {
+router.get('/', function(req, res, next) {
+
   var resultArray = [];
+  console.log("hiiii");
   mongo.connect(url, function(err, db) {
     assert.equal(null, err);
     var cursor = db.collection('ingredients').find();
@@ -27,6 +29,7 @@ router.get('/get-data', function(req, res, next) {
       db.close();
       // var output = resultArray.filter(function(x){return x.cat_id == 1});
       res.render('index', {items: resultArray});
+      res.render('index', { title: 'Express' , layout: 'layout_admin' });
 
     });
   });
