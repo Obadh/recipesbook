@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>RecipeAdmin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- admin JavaScript -->
+  <script src="admin.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+
+<!-- add admin CSS -->
+<link rel="stylesheet" type="text/css" href="admin.css">
+
+</head>
+<body>
+  <div class="form">
+
+        <ul class="tab-group">
+          <li class="tab active"><a href="#addRecipe">Add recipe</a></li>
+          <li class="tab"><a href="#addIngredient">add ingredient</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="addRecipe">
+            <h1>Add Your Recipe</h1>
+
+            <form action="/" method="post">
+
+
+              <div class="field-wrap">
+                <label>
+                  The name<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" />
+              </div>
+
+            <div class="field-wrap field-wrap-2">
+              <label>
+                Descreption<span class="req">*</span>
+              </label>
+              <textarea rows="4" cols="30"> </textarea>
+            </div>
+
+            <div class="field-wrap field-wrap-2">
+              <label>
+                Ingredients<span class="req">*</span>
+              </label>
+              <textarea rows="4" cols="30"> </textarea>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                Upload Image<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+
+            <button type="submit" class="button button-block"/>Submit</button>
+
+            </form>
+
+          </div>
+
+          <div id="addIngredient">
+            <h1>Add Your Ingredient</h1>
+
+            <form action="/" method="post">
+
+              <div class="field-wrap">
+              <label>
+                the Name<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                category<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+
+            <div class="field-wrap">
+              <label>
+                Uplaod Image<span class="req">*</span>
+              </label>
+              <input type="text"required autocomplete="off"/>
+            </div>
+
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+            <button class="button button-block"/>Submit</button>
+
+            </form>
+
+          </div>
+
+        </div><!-- tab-content -->
+
+  </div> <!-- /form -->
+  <script src="admin.js"></script>
+</body>
+</html>
