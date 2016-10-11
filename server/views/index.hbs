@@ -27,18 +27,31 @@
         </div><!-- end container -->
     </div><!-- end navbar -->
 
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+    </br>
+
+    {{# each categories }}
+        <div class="category" style="border: bottom 1px solid #ccc;">
+          <h1>{{this.name}}</h1>
+        {{# each this.items }}
+            <h3>{{ this.name }} </h3>
+            <img alt="User Pic" src="{{ this.image }}" class="img-responsive">
+
+            <!--<h3>{{ this.category }} </h3>-->
 
 
-    {{# each items }}
-
-        <h3>{{ this.name }} </h3>
-
-        <h3>{{ this.category }} </h3>
-
-        <img alt="User Pic" src="{{ this.image }}" class="img-responsive">
-
-
+        {{/each}}
+      </div>
     {{/each}}
+
+
 
 
 
@@ -78,13 +91,3 @@
     <script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
     <script src="/recipesbook/includes/js/script.js"></script>
-
-
-
-
-
-
-
-
-
-
