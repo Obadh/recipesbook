@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a style="float: left; margin: 2px 0 0 5px;" class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="Your Logo"></a>
+            <a style="float: left; margin: 2px 0 0 5px;" class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="Your Logo" height="80" width="80"></a>
 
 
 
@@ -29,16 +29,28 @@
 
 
 
-    {{# each items }}
-
-        <h3>{{ this.name }} </h3>
-
-        <h3>{{ this.category }} </h3>
-
-        <img alt="User Pic" src="{{ this.image }}" class="img-responsive">
 
 
-    {{/each}}
+        <div class="container productsContainer">
+
+                <div id="products" class="row list-group">
+                    {{# each items }}
+                        <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                            <div class="thumbnail">
+                                <img class="group list-group-image" src="{{ this.image }}" alt="User Pic" />
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ this.name }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+        </div>
+
+
+
+
 
 
 

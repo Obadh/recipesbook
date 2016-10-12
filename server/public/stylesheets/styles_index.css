@@ -56,7 +56,7 @@ ul.unstyled {
 }
 
 .navbar {
-	background: #1a1a1a;
+	background: #1a1a19;
 
 }
 
@@ -75,8 +75,8 @@ ul.unstyled {
 }
 
 #main {
-	margin-top: 60px;
-}
+	 margin-top: 60px;
+ }
 
 
 
@@ -84,46 +84,10 @@ ul.unstyled {
    Global Styles
    -------------------------------------- */
 
-.alert {
-	margin-top: 20px;
-	display: none;
-}
-
-.well {
-	margin: 20px 0;
-}
-
-.tabbable img.thumbnail {
-	margin: 0 20px 10px 0;
-}
-
-.thumbnails {
-	margin: 20px 0;
-}
-
 .thumbnail {
-	position: relative;
+	height:200px !important;
+	margin-bottom: 5px;
 }
-
-.thumbnail h3 {
-	font-size: 16px;
-	margin: 0 0 10px;
-	line-height: 20px;
-}
-
-.thumbnail .price {
-	font-size: 22px;
-	position: absolute;
-	top: -10px;
-	right: -10px;
-	padding: 10px;
-}
-
-.thumbnail .price sup {
-	font-weight: normal;
-	font-size: 12px;
-}
-
-.thumbnail span.glyphicon {
-	margin-right: 5px;
+.productsContainer {
+	margin-top: 100px;
 }
