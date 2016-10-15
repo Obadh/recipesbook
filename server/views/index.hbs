@@ -1,55 +1,70 @@
-<div class="container" id="main">
-    <div class="navbar navbar-fixed-top">
-        <div class="container">
-            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-            <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<div class="navbar navbar-inverse" id="nav-main">
+        <div class="container-fluid">
+          <div class="navbar-header">
+        <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
 
-            <a style="float: left; margin: 2px 0 0 5px;" class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="Your Logo"></a>
-
-
-
-            <div class="nav-collapse collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">AboutUs</a>
-                    </li>
-
-                </ul>
-            </div><!-- end nav-collapse -->
-
-        </div><!-- end container -->
-    </div><!-- end navbar -->
-
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
-
-    {{# each categories }}
-        <div class="category" style="border: bottom 1px solid #ccc;">
-          <h1>{{this.name}}</h1>
-        {{# each this.items }}
-            <h3>{{ this.name }} </h3>
-            <img alt="User Pic" src="{{ this.image }}" class="img-responsive">
-
-            <!--<h3>{{ this.category }} </h3>-->
-
-
-        {{/each}}
+        <a class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="my Logo" height="80" width="80"></a>
       </div>
-    {{/each}}
+        <div class="nav-collapse collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">AboutUs</a>
+                </li>
+            </ul>
+        </div><!-- end nav-collapse -->
+      </div>
+</div><!-- end navbar -->
+
+
+
+<div class="container">
+    <button class="pull-left btn btn-primary" type="button">
+      Number of results:  <span class="badge">100</span>
+    </button>
+
+
+  <!-- <form>
+    <div center class="input-field">
+      <input id="search" type="text" data-ng-model="searching.title" required placeholder="Search...">
+      <label for="search"></label>
+    </div>
+  </form> -->
+  <form class="form-inline pull-right">
+            <input class="form-control" type="text" placeholder="Search">
+            <button class="btn btn-success-outline pull-right" type="submit">Search</button>
+        </form>
+
+
+</div>
+
+
+        <div class="container productsContainer">
+
+                <div id="products" class="row list-group">
+                    {{# each categories }}
+                    <div class="clearfix"></div>
+                      <h1>{{this.name}}</h1>
+                      {{# each this.items }}
+                          <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                              <div class="thumbnail">
+                                  <img class="group list-group-image" src="{{ this.image }}" alt="User Pic" />
+                                  <div class="caption">
+                                      <h4 class="group inner list-group-item-heading">
+                                          {{ this.name }}</h4>
+                                  </div>
+                              </div>
+                          </div>
+                        {{/each}}
+                    {{/each}}
+                </div>
+        </div>
 
 
 
