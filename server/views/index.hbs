@@ -22,12 +22,8 @@
       </div>
 </div><!-- end navbar -->
 
+<div class="container ">
 
-
-<div class="container">
-    <button class="pull-left btn btn-primary" type="button">
-      Number of results:  <span class="badge">100</span>
-    </button>
 
 
   <!-- <form>
@@ -36,33 +32,46 @@
       <label for="search"></label>
     </div>
   </form> -->
-  <form class="form-inline pull-right">
+        <form class="form-inline pull-right">
             <input class="form-control" type="text" placeholder="Search">
             <button class="btn btn-success-outline pull-right" type="submit">Search</button>
         </form>
 
 
-</div>
+      </div>
+
+    	<!-- <div>
+    		<input ng-model="test">
+    		<h1>{{test}}</h1>
+    	</div> -->
+
 
 
         <div class="container productsContainer">
-
                 <div id="products" class="row list-group">
+                  <form method="get">
                     {{# each categories }}
                     <div class="clearfix"></div>
                       <h1>{{this.name}}</h1>
                       {{# each this.items }}
                           <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                            <label class="btn">
                               <div class="thumbnail">
-                                  <img class="group list-group-image" src="{{ this.image }}" alt="User Pic" />
+                                  <img class="group list-group-image img-thumbnail img-check" src="{{ this.image }}" alt="User Pic" />
+                                  <input type="checkbox" name="{{ this.name }}" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
                                   <div class="caption">
                                       <h4 class="group inner list-group-item-heading">
                                           {{ this.name }}</h4>
                                   </div>
                               </div>
+                            </label>
                           </div>
                         {{/each}}
                     {{/each}}
+                    <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
+                      Number of results:  <span class="badge">100</span>
+                    </button>
+                    </form>
                 </div>
         </div>
 
