@@ -59,5 +59,9 @@ img.list-group-image{
 {
   opacity:0.5;
 	color:#996;
-
+}
+#fixed-btn {
+    position: fixed;
+    top: 10em;
+    left: 1em;
 }
