@@ -40,16 +40,16 @@
 
       </div>
 
-    	<!-- <div>
-    		<input ng-model="test">
-    		<h1>{{test}}</h1>
-    	</div> -->
+      <div>
+  			<input ng-model="test">
+  			<h1>[[test]]</h1>
+  		</div>
 
 
 
         <div class="container productsContainer">
                 <div id="products" class="row list-group">
-                  <form method="get">
+                  <form action="#" method="get">
                     {{# each categories }}
                     <div class="clearfix"></div>
                       <h1>{{this.name}}</h1>
@@ -58,7 +58,7 @@
                             <label class="btn">
                               <div class="thumbnail">
                                   <img class="group list-group-image img-thumbnail img-check" src="{{ this.image }}" alt="User Pic" />
-                                  <input type="checkbox" name="{{ this.name }}" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
+                                  <input type="checkbox" name="ingredients" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
                                   <div class="caption">
                                       <h4 class="group inner list-group-item-heading">
                                           {{ this.name }}</h4>
