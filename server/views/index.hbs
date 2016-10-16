@@ -1,91 +1,117 @@
-<div class="container" id="main">
-    <div class="navbar navbar-fixed-top">
-        <div class="container">
-            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-            <button class="navbar-toggle" data-target=".navbar-responsive-collapse" data-toggle="collapse" type="button">
+<div class="navbar navbar-inverse" id="nav-main">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
 
-            <a style="float: left; margin: 2px 0 0 5px;" class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="Your Logo"></a>
+            <a class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="my Logo" height="80" width="80"></a>
+        </div>
+        <div class="nav-collapse collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">AboutUs</a>
+                </li>
+            </ul>
+        </div><!-- end nav-collapse -->
+    </div>
+</div><!-- end navbar -->
+
+<div class="container">
+    <button class="pull-left btn btn-primary" type="submit">
+        Number of results:  <span class="badge">100</span>
+    </button>
 
 
-
-            <div class="nav-collapse collapse navbar-responsive-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">AboutUs</a>
-                    </li>
-
-                </ul>
-            </div><!-- end nav-collapse -->
-
-        </div><!-- end container -->
-    </div><!-- end navbar -->
-
-    </br> </br> </br> </br> </br>
-
-
-
-    {{# each categories }}
-        <div class="category" style="border: bottom 1px solid #ccc;">
-            </br> </br> </br> </br> </br>
-          <h1>{{this.name}}</h1>
-
-        {{# each this.items }}
-            <h3>{{ this.name }} </h3>
-            <img alt="User Pic" src="{{ this.image }}" class="img-responsive">
-
-            <!--<h3>{{ this.category }} </h3>-->
-        {{/each}}
-
-
-
-
+    <!-- <form>
+      <div center class="input-field">
+        <input id="search" type="text" data-ng-model="searching.title" required placeholder="Search...">
+        <label for="search"></label>
       </div>
-    {{/each}}
+    </form> -->
+    <form class="form-inline pull-right">
+        <input class="form-control" type="text" placeholder="Search">
+        <button class="btn btn-success-outline pull-right" type="submit">Search</button>
+    </form>
+
+
+</div>
+
+<div>
+    <input ng-model="test">
+    <h1>{{test}}</h1>
+</div>
+
+
+
+<div class="container productsContainer">
+
+    <div id="products" class="row list-group">
+        {{# each categories }}
+            <div class="clearfix"></div>
+            <h1>{{this.name}}</h1>
+            {{# each this.items }}
+                <form method="get">
+                    <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <label class="btn">
+                            <div class="thumbnail">
+                                <img class="group list-group-image img-thumbnail img-check" src="{{ this.image }}" alt="User Pic" />
+                                <input type="checkbox" name="{{ this.name }}" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
+                                <div class="caption">
+                                    <h4 class="group inner list-group-item-heading">
+                                        {{ this.name }}</h4>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </form>
+            {{/each}}
+        {{/each}}
+    </div>
+</div>
 
 
 
 
 
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-10 text-center">
-                    <br>
-                    <br>
-                    <h4>Copyright &copy; O.K Web Design 2016. All Rights Reserved</h4>
-                    <h4><a href="mailto:obadhh@gmail.com">Obadhh@gmail.com</a></h4>
-                </div><!-- end col-sm-10 -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 text-center">
+                <br>
+                <br>
+                <h4>Copyright &copy; O.K Web Design 2016. All Rights Reserved</h4>
+                <h4><a href="mailto:obadhh@gmail.com">Obadhh@gmail.com</a></h4>
+            </div><!-- end col-sm-10 -->
 
 
 
-                <div class="col-sm-2">
-                    <h5>Follow Us</h5>
-                    <ul class="unstyled">
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Google Plus</a></li>
-                    </ul>
-                </div><!-- end col-sm-2 -->
+            <div class="col-sm-2">
+                <h5>Follow Us</h5>
+                <ul class="unstyled">
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Google Plus</a></li>
+                </ul>
+            </div><!-- end col-sm-2 -->
 
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </footer>
+        </div><!-- end row -->
+    </div><!-- end container -->
+</footer>
 </div> <!-- end container -->
 
-    <!-- All Javascript at the bottom of the page for faster page loading -->
-    <!-- First try for the online version of jQuery-->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <!-- If no online access, fallback to our hardcoded version of jQuery -->
-    <script>window.jQuery || document.write('<script src="/recipesbook/includes/js/jquery-1.8.2.min.js"><\/script>')</script>
-    <!-- Bootstrap JS -->
-    <script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Custom JS -->
-    <script src="/recipesbook/includes/js/script.js"></script>
+<!-- All Javascript at the bottom of the page for faster page loading -->
+<!-- First try for the online version of jQuery-->
+<script src="http://code.jquery.com/jquery.js"></script>
+<!-- If no online access, fallback to our hardcoded version of jQuery -->
+<script>window.jQuery || document.write('<script src="/recipesbook/includes/js/jquery-1.8.2.min.js"><\/script>')</script>
+<!-- Bootstrap JS -->
+<script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<script src="/recipesbook/includes/js/script.js"></script>
