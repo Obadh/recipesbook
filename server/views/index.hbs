@@ -49,7 +49,7 @@
 
         <div class="container productsContainer">
                 <div id="products" class="row list-group">
-                  <form action="#" method="get">
+                  <form action="/get_recipe" method="post">
                     {{# each categories }}
                     <div class="clearfix"></div>
                       <h1>{{this.name}}</h1>
@@ -58,7 +58,7 @@
                             <label class="btn">
                               <div class="thumbnail">
                                   <img class="group list-group-image img-thumbnail img-check" src="{{ this.image }}" alt="User Pic" />
-                                  <input type="checkbox" name="ingredients" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
+                                  <input type="checkbox" name="food" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
                                   <div class="caption">
                                       <h4 class="group inner list-group-item-heading">
                                           {{ this.name }}</h4>

@@ -39,3 +39,38 @@ router.get('/', function(req, res, next) {
     });
   });
 });
+
+
+router.post('/get_recipe', function(req, res, next) {
+
+
+    var item =[];
+    var recipesArray=[];
+    item = req.body.food;
+
+      console.log(item);
+
+    mongo.connect(url, function (err, db) {
+      assert.equal(null, err);
+
+
+      var cursor = db.collection('recipes').find();
+      cursor.forEach(function(doc, err) {
+        assert.equal(null, err);
+        recipesArray.push(doc);
+
+      }, function() {
+
+        // for(int i=0; i<=recipesArray.length();i++){
+        //   console.log(recipesArray[i].ingredients);
+        // }
+
+
+        db.close();
+
+      });
+
+
+});
+
+});
