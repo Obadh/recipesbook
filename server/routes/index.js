@@ -17,60 +17,114 @@ module.exports = router;
 
 router.get('/', function(req, res, next) {
 
-  var resultArray = [];
-  mongo.connect(url, function(err, db) {
-    assert.equal(null, err);
-    var cursor = db.collection('ingredients').find();
-    cursor.forEach(function(doc, err) {
-      assert.equal(null, err);
-      resultArray.push(doc);
-    }, function() {
-      db.close();
-      var output = resultArray.filter(function(x){return x.category == 1 || x.category == 2 || x.category == 3});
-      var categories= [];
-      categories.push({category : 1,  name: 'Vegetables', items:resultArray.filter(function(x){return x.category == 1})})
-      categories.push({category : 2, name: 'Meet', items:resultArray.filter(function(x){return x.category == 2})})
-      categories.push({category : 3, name: 'Seafood', items:resultArray.filter(function(x){return x.category == 3})})
+    var resultArray = [];
+    mongo.connect(url, function(err, db) {
+        assert.equal(null, err);
+        var cursor = db.collection('ingredients').find();
+        cursor.forEach(function(doc, err) {
+            assert.equal(null, err);
+            resultArray.push(doc);
+        }, function() {
+            db.close();
+            var output = resultArray.filter(function(x) {
+                return x.category == 1 || x.category == 2 || x.category == 3
+            });
+            var categories = [];
+            categories.push({
+                category: 1,
+                name: 'Vegetables',
+                items: resultArray.filter(function(x) {
+                    return x.category == 1
+                })
+            })
+            categories.push({
+                category: 2,
+                name: 'Meet',
+                items: resultArray.filter(function(x) {
+                    return x.category == 2
+                })
+            })
+            categories.push({
+                category: 3,
+                name: 'Seafood',
+                items: resultArray.filter(function(x) {
+                    return x.category == 3
+                })
+            })
 
 
-      res.render('index', {categories: categories});
-      // res.render('index', { title: 'Express' , layout: 'layout_admin' });
+            res.render('index', {
+                categories: categories
+            });
+            // res.render('index', { title: 'Express' , layout: 'layout_admin' });
 
+        });
     });
-  });
 });
 
 
 router.post('/get_recipe', function(req, res, next) {
 
 
-    var item =[];
-    var recipesArray=[];
+    var item = [];
     item = req.body.food;
-
-      console.log(item);
-
-    mongo.connect(url, function (err, db) {
-      assert.equal(null, err);
+    var recipesArray = [];
+    var item2 = [];
+    var recipesArray2 = []
 
 
-      var cursor = db.collection('recipes').find();
-      cursor.forEach(function(doc, err) {
+
+    mongo.connect(url, function(err, db) {
         assert.equal(null, err);
-        recipesArray.push(doc);
-
-      }, function() {
-
-        // for(int i=0; i<=recipesArray.length();i++){
-        //   console.log(recipesArray[i].ingredients);
-        // }
 
 
-        db.close();
+        var cursor = db.collection('recipes').find();
+        cursor.forEach(function(doc, err) {
+            assert.equal(null, err);
+            recipesArray.push(doc);
 
-      });
+        }, function() {
+
+            // for(int i=0; i<=recipesArray.length();i++){
+            //   console.log(recipesArray[i].ingredients);
+            // }
+            console.log(item);
+
+            for (var x in recipesArray) {
+                item2 = recipesArray[x].ingredients;
+
+                function arrayContainsArray(superset, subset) {
+                    return subset.every(function(value) {
+                        return (superset.indexOf(value) >= 0);
+                    });
+                }
+
+                var y = arrayContainsArray(item, item2)
+
+                if (y === true) {
+                    console.log(y);
+                  // var z=   recipesArray[x];
 
 
-});
+                   recipesArray2.push(recipesArray[x]);
+
+
+                }
+
+            }
+            console.log (recipesArray2[1]);
+
+            res.render('index', {
+                recipes: recipesArray2
+            });
+
+            db.close();
+
+
+
+        });
+
+
+    });
 
 });
