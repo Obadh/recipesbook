@@ -68,6 +68,10 @@ router.post('/get_recipe', function(req, res, next) {
 
     var item = [];
     item = req.body.food;
+    if ( typeof item == "string" )
+    {
+     var item = item.split(" ");
+   }
     var recipesArray = [];
     var item2 = [];
     var recipesArray2 = []
@@ -93,18 +97,21 @@ router.post('/get_recipe', function(req, res, next) {
             for (var x in recipesArray) {
                 item2 = recipesArray[x].ingredients;
 
-                function arrayContainsArray(superset, subset) {
-                    return subset.every(function(value) {
-                        return (superset.indexOf(value) >= 0);
-                    });
-                }
+                // function arrayContainsArray(superset, subset) {
+                //     return superset.every(function(value) {
+                //         return (subset.indexOf(value) >= 0);
+                //     });
+                // }
 
-                var y = arrayContainsArray(item, item2)
 
-                if (y === true) {
-                    console.log(y);
+                   var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
+
+
+                // y = arrayContainsArray(item, item2)
+
+                if (isSuperset === true) {
+                    console.log(isSuperset);
                   // var z=   recipesArray[x];
-
 
                    recipesArray2.push(recipesArray[x]);
 
@@ -112,7 +119,6 @@ router.post('/get_recipe', function(req, res, next) {
                 }
 
             }
-            console.log (recipesArray2[1]);
 
             res.render('index', {
                 recipes: recipesArray2
