@@ -9,27 +9,30 @@ var url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
 module.exports = router;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('admin', { title: 'my admin page', layout: 'layout_admin' });
-});
-
-//
-// router.get('/get-data', function(req, res, next) {
-//   var resultArray = [];
-//   mongo.connect(url, function(err, db) {
-//     assert.equal(null, err);
-//     var cursor = db.collection('ingredients').find();
-//     cursor.forEach(function(doc, err) {
-//       assert.equal(null, err);
-//       resultArray.push(doc);
-//     }, function() {
-//       db.close();
-//       // var output = resultArray.filter(function(x){return x.cat_id == 1});
-//       res.render('admin', {items: resultArray});
-//
-//     });
-//   });
+//  router.get('/', function(req, res, next) {
+//    res.render('admin', { title: 'my admin page', layout: 'layout_admin' });
 // });
+
+
+router.get('/', function(req, res, next) {
+  var resulIngredients = [];
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    var cursor = db.collection('ingredients').find();
+    cursor.forEach(function(doc, err) {
+      assert.equal(null, err);
+      resulIngredients.push(doc);
+    }, function() {
+      db.close();
+      // var output = resultArray.filter(function(x){return x.cat_id == 1});
+      res.render('admin', {items: resulIngredients , layout: 'layout_admin'});
+      console.log(resulIngredients[0].name);
+      console.log("erojkroegkgk");
+
+
+    });
+  });
+});
 
 
 router.post('/recipe', function(req, res, next) {
@@ -82,6 +85,3 @@ router.post('/ingredients', function(req, res, next) {
 
 
 });
-
-
-
