@@ -29,6 +29,7 @@ router.get('/', function(req, res, next) {
             var output = resultArray.filter(function(x) {
                 return x.category == 1 || x.category == 2 || x.category == 3
             });
+
             var categories = [];
             categories.push({
                 category: 1,
