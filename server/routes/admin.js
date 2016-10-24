@@ -42,7 +42,7 @@ router.post('/recipe', function(req, res, next) {
       name: req.body.name_recipes,
       image: req.body.Image_recipes,
       description: req.body.Descreption_recipes,
-        ingredients : req.body.Ingredients_recipes
+      ingredients : req.body.Ingredients_recipes
     };
 
 

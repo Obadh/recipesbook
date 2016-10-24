@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="my Logo" height="80" width="80"></a>
+        <a class="navbar-brand" href="/"><img src="images/logo.png" alt="my Logo" height="80" width="80"></a>
       </div>
         <div class="nav-collapse collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -40,10 +40,10 @@
 
       </div>
 
-      <div>
+      <!-- <div>
   			<input ng-model="test">
   			<h1>[[test]]</h1>
-  		</div>
+  		</div> -->
 
 
 
@@ -68,7 +68,7 @@
                           </div>
                         {{/each}}
                     {{/each}}
-                    <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
+                    <button class="pull-left btn btn-primary" id="fixed-btn" ng-click="getRecipes" type="submit">
                       Number of results:  <span class="badge">100</span>
                     </button>
                     </form>
@@ -79,10 +79,19 @@
 
 
         {{# each recipes }}
-         Name of recipes : {{this.name}} </br>
-         Ingredients :  {{this.ingredients}} </br>
-         Image : <img  src="{{ this.image }}" alt="User Pic" /> </br>
-         Description :  {{this.description}} </br>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <h1>Name of recipes : {{this.name}}</h1>
+              <h3>Ingredients :  {{this.ingredients}}</h3>
+              <h4>Description :  {{this.description}}</h4>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <img  src="{{ this.image }}" alt="User Pic" /> </br>
+            </div>
+          </div>
+        </div>
+
 
       </br></br></br>
         {{/each}}
@@ -143,4 +152,4 @@
     <!-- Bootstrap JS -->
     <script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
-    <script src="/recipesbook/includes/js/script.js"></script>
+    <script src="javascripts/js-index.js"></script>

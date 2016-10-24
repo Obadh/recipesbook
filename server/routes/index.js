@@ -64,19 +64,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/get_recipe', function(req, res, next) {
-
-
-    var item = [];
-    item = req.body.food;
-    if ( typeof item == "string" )
-    {
-     var item = item.split(" ");
-   }
     var recipesArray = [];
-    var item2 = [];
-    var recipesArray2 = []
-
-
 
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
@@ -86,49 +74,44 @@ router.post('/get_recipe', function(req, res, next) {
         cursor.forEach(function(doc, err) {
             assert.equal(null, err);
             recipesArray.push(doc);
-
         }, function() {
 
-            // for(int i=0; i<=recipesArray.length();i++){
-            //   console.log(recipesArray[i].ingredients);
-            // }
-            console.log(item);
+            var ingredients = typeof req.body.food === 'string' ? (req.body.food.indexOf(',') > -1 ? req.body.food.split(',') : [req.body.food]) : req.body.food;
 
-            for (var x in recipesArray) {
-                item2 = recipesArray[x].ingredients;
+            /** This is the definition of the variable before;
+            if(typeof req.body.food === 'string'){
+              if(req.body.food.indexOf(',') > -1){
+                ingredients = req.body.food.split(',')
+              }else{
+                ingredients = [ req.body.food ]
+              }
+            }else{
+              ingredients = req.body.food
+            } **/
 
-                // function arrayContainsArray(superset, subset) {
-                //     return superset.every(function(value) {
-                //         return (subset.indexOf(value) >= 0);
-                //     });
-                // }
-
-
-                   var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
-
-
-                // y = arrayContainsArray(item, item2)
-
-                if (isSuperset === true) {
-                    console.log(isSuperset);
-                  // var z=   recipesArray[x];
-
-                   recipesArray2.push(recipesArray[x]);
-
-
+            recipesArray = recipesArray.filter(function(recepie){
+              var isPreset = [];
+              var _ingredientsRecipe = recepie.ingredients.map(function(_ingredient){
+                return _ingredient.toLowerCase()
+              });
+              for(var k in ingredients){
+                var _ingredient = ingredients[k].toLowerCase();
+                if(_ingredientsRecipe.indexOf(_ingredient) > -1){
+                  isPreset.push(_ingredient);
                 }
+              }
+              console.log(isPreset.length, ingredients.length)
+              return isPreset.length === ingredients.length;
+            })
 
-            }
-
-            res.render('index', {
-                recipes: recipesArray2
+            res.json({
+                recipes: recipesArray
             });
 
             db.close();
 
-
-
         });
+
 
 
     });
