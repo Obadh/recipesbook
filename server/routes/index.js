@@ -1,8 +1,12 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 var mongo = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var assert = require('assert');
+var bodyParser = require('body-parser');
+
+
 
 var url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
 
@@ -12,7 +16,8 @@ var url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
 // });
 
 module.exports = router;
-
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
 
 
 router.get('/', function(req, res, next) {
@@ -52,10 +57,10 @@ router.get('/', function(req, res, next) {
                 })
             })
 
-
-            res.render('index', {
-                categories: categories
-            });
+            res.json(categories);
+            // res.render('index', {
+            //     categories: categories
+            // });
             // res.render('index', { title: 'Express' , layout: 'layout_admin' });
 
         });

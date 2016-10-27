@@ -3,3 +3,4 @@ $(document).ready(function(e){
 				$(this).toggleClass("check");
 			});
 	});
+  

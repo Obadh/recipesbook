@@ -40,14 +40,16 @@
 
       </div>
 
-      <!-- <div>
-  			<input ng-model="test">
-  			<h1>[[test]]</h1>
-  		</div> -->
+      <div ng-controller="Appctrl">
+        <tr ng-repeat="category in categories">
+          <td>[[category.category]]</td>
+          <td>[[category.name]]</td>
+        </tr>
+  		</div>
 
 
 
-        <div class="container productsContainer">
+        <!-- <div class="container productsContainer">
                 <div id="products" class="row list-group">
                   <form action="/get_recipe" method="post">
                     {{# each categories }}
@@ -95,7 +97,7 @@
 
       </br></br></br>
         {{/each}}
-
+ -->
 
 
 
