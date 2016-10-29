@@ -19,106 +19,104 @@ module.exports = router;
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
+function getCategories(cb) {
+  var resultArray = [];
+  mongo.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var cursor = db.collection('ingredients').find();
+      cursor.forEach(function(doc, err) {
+          assert.equal(null, err);
+          resultArray.push(doc);
+      }, function() {
+          db.close();
+          var categories = [];
+          categories.push({
+              category: 1,
+              name: 'Vegetables',
+              items: resultArray.filter(function(x) {
+                  return x.category == 1
+              })
+          })
+          categories.push({
+              category: 2,
+              name: 'Meet',
+              items: resultArray.filter(function(x) {
+                  return x.category == 2
+              })
+          })
+          categories.push({
+              category: 3,
+              name: 'Seafood',
+              items: resultArray.filter(function(x) {
+                  return x.category == 3
+              })
+          })
+        cb(categories);
+
+
+      });
+  });
+}
+
 
 router.get('/', function(req, res, next) {
-
-    var resultArray = [];
-    mongo.connect(url, function(err, db) {
-        assert.equal(null, err);
-        var cursor = db.collection('ingredients').find();
-        cursor.forEach(function(doc, err) {
-            assert.equal(null, err);
-            resultArray.push(doc);
-        }, function() {
-            db.close();
-            var output = resultArray.filter(function(x) {
-                return x.category == 1 || x.category == 2 || x.category == 3
-            });
-            var categories = [];
-            categories.push({
-                category: 1,
-                name: 'Vegetables',
-                items: resultArray.filter(function(x) {
-                    return x.category == 1
-                })
-            })
-            categories.push({
-                category: 2,
-                name: 'Meet',
-                items: resultArray.filter(function(x) {
-                    return x.category == 2
-                })
-            })
-            categories.push({
-                category: 3,
-                name: 'Seafood',
-                items: resultArray.filter(function(x) {
-                    return x.category == 3
-                })
-            })
-
-            res.json(categories);
-            // res.render('index', {
-            //     categories: categories
-            // });
-            // res.render('index', { title: 'Express' , layout: 'layout_admin' });
-
-        });
+  //res.json(categories);
+  getCategories(function (categories) {
+    res.render('index', {
+        categories: categories
     });
+  });
 });
+
+router.get('/categories' , function (req,res,next) {
+  getCategories(function (categories) {
+    res.json(categories);
+  });
+})
+
+
 
 
 router.post('/get_recipe', function(req, res, next) {
+  var item = [];
+    item = req.body.food;
+    if ( typeof item == "string" )
+    {
+     var item = item.split(" ");
+   }
     var recipesArray = [];
-
+    var item2 = [];
+    var recipesArray2 = []
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
-
-
         var cursor = db.collection('recipes').find();
         cursor.forEach(function(doc, err) {
             assert.equal(null, err);
             recipesArray.push(doc);
         }, function() {
-
-            var ingredients = typeof req.body.food === 'string' ? (req.body.food.indexOf(',') > -1 ? req.body.food.split(',') : [req.body.food]) : req.body.food;
-
-            /** This is the definition of the variable before;
-            if(typeof req.body.food === 'string'){
-              if(req.body.food.indexOf(',') > -1){
-                ingredients = req.body.food.split(',')
-              }else{
-                ingredients = [ req.body.food ]
-              }
-            }else{
-              ingredients = req.body.food
-            } **/
-
-            recipesArray = recipesArray.filter(function(recepie){
-              var isPreset = [];
-              var _ingredientsRecipe = recepie.ingredients.map(function(_ingredient){
-                return _ingredient.toLowerCase()
-              });
-              for(var k in ingredients){
-                var _ingredient = ingredients[k].toLowerCase();
-                if(_ingredientsRecipe.indexOf(_ingredient) > -1){
-                  isPreset.push(_ingredient);
+            // for(int i=0; i<=recipesArray.length();i++){
+            //   console.log(recipesArray[i].ingredients);
+            // }
+            console.log(item);
+            for (var x in recipesArray) {
+                item2 = recipesArray[x].ingredients;
+                // function arrayContainsArray(superset, subset) {
+                //     return superset.every(function(value) {
+                //         return (subset.indexOf(value) >= 0);
+                //     });
+                // }
+                   var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
+                // y = arrayContainsArray(item, item2)
+                if (isSuperset === true) {
+                    console.log(isSuperset);
+                  // var z=   recipesArray[x];
+                   recipesArray2.push(recipesArray[x]);
                 }
-              }
-              console.log(isPreset.length, ingredients.length)
-              return isPreset.length === ingredients.length;
-            })
-
-            res.json({
-                recipes: recipesArray
+            }
+            res.render('get_recipe', {
+                recipes: recipesArray2
             });
-
             db.close();
-
         });
-
-
-
     });
-
 });

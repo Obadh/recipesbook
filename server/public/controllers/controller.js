@@ -1,9 +1,12 @@
 function Appctrl($scope,$http) {
-  $http.get('/').success(function (response) {
-    console.log("I got the data I requested");
+  $http.get('/categories').success(function (response) {
+    console.log("I got the data I requested", response);
     $scope.categories = response;
   })
 }
+
+
+
 
 
 // angular.
