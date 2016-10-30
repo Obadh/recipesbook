@@ -22,47 +22,24 @@
       </div>
 </div><!-- end navbar -->
 
-
-        <div class="nav-wrapper container">
-          <form class="form-inline pull-right">
-            <div center class="input-field">
-              <input id="search" type="text" data-ng-model="searching.name" required placeholder="Search...">
-              <label for="search"></label>
-            </div>
-          </form>
-        </div>
-
-
-
-      <div class="container productsContainer" ng-controller="Appctrl">
-        <div id="products" class="row list-group">
-          <form action="/get_recipe" method="post">
-
-            <div ng-repeat="category in categories">
-              <div class="clearfix"></div>
-              <h1>[[category.name]]</h1>
-
-              <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in category.items | filter:searching">
-                <label class="btn">
-                  <div class="thumbnail">
-                    <img class="group list-group-image img-thumbnail img-check" ng-click="toggle = !toggle" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
-                    <input type="checkbox" name="food" id="myInput" value="[[item.name]]" class="hidden" autocomplete="off">
-                    <div class="caption">
-                      <h4 class="group inner list-group-item-heading">[[item.name]]</h4>
-                    </div>
-                 </div>
-                </label>
-              </div>
-            </div>
-            <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
-              Number of results:  <span class="badge">{{recipes.length}}</span>
-            </button>
-          </form>
-        </div>
-      </div>
+{{# each recipes }}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <h1>Name of recipes : {{this.name}}</h1>
+      <h3>Ingredients :  {{this.ingredients}}</h3>
+      <h4>Description :  {{this.description}}</h4>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+      <img  src="{{ this.image }}" alt="User Pic" /> </br>
+    </div>
+  </div>
+</div>
+</br></br></br>
+{{/each}}
 
 
-      <!-- <div ng-controller="Appctrll">
+      <!-- <div ng-controller="Appctrl">
         <div class="container" ng-repeat="recipe in recipes">
           <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
