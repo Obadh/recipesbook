@@ -79,13 +79,19 @@ router.get('/categories' , function (req,res,next) {
 
 router.post('/get_recipes', function(req, res, next) {
   // var item = [];
-    item = req.body.ingredients;
-    console.log("hi");
-
-    if ( typeof item == "string" )
+    var ingredientsNames= [];
+    item = req.body;
+    for (var i=0; i<req.body.length; i++)
     {
-     var item = item.split(" ");
-   }
+      ingredientsNames.push(req.body[i].name);
+    }
+    console.log(ingredientsNames);
+
+  //   if ( typeof item == "string" )
+  //   {
+  //    var item = item.split(" ");
+  //  }
+
     var recipesArray = [];
     var item2 = [];
     var recipesArray2 = []
@@ -99,7 +105,6 @@ router.post('/get_recipes', function(req, res, next) {
             // for(int i=0; i<=recipesArray.length();i++){
             //   console.log(recipesArray[i].ingredients);
             // }
-            console.log(item);
             for (var x in recipesArray) {
                 item2 = recipesArray[x].ingredients;
                 // function arrayContainsArray(superset, subset) {
@@ -107,17 +112,17 @@ router.post('/get_recipes', function(req, res, next) {
                 //         return (subset.indexOf(value) >= 0);
                 //     });
                 // }
-                   var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
+                   var isSuperset = ingredientsNames.every(function (val) { return item2.indexOf(val) >= 0; });
                 // y = arrayContainsArray(item, item2)
                 if (isSuperset === true) {
                     console.log(isSuperset);
                   // var z=   recipesArray[x];
                    recipesArray2.push(recipesArray[x]);
                 }
+
             }
-            res.render('get_recipe', {
-                recipes: recipesArray2
-            });
+            var recipesArray2Number = recipesArray2.length ;
+            res.json(recipesArray2);
             db.close();
         });
     });

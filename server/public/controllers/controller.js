@@ -14,6 +14,7 @@ function Appctrl($scope,$http) {
     $http.post('/get_recipes', data).success(function (res) {
 
       $scope.totalRecepiesFound = res.length;
+      console.log(res);
     })
     console.log(req);
     return []
