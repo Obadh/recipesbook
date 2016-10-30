@@ -77,9 +77,11 @@ router.get('/categories' , function (req,res,next) {
 
 
 
-router.post('/get_recipe', function(req, res, next) {
-  var item = [];
-    item = req.body.food;
+router.post('/get_recipes', function(req, res, next) {
+  // var item = [];
+    item = req.body.ingredients;
+    console.log("hi");
+
     if ( typeof item == "string" )
     {
      var item = item.split(" ");
