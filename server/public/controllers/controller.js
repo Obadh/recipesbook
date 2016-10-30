@@ -1,7 +1,36 @@
 function Appctrl($scope,$http) {
+  $scope.console = console.log;
+  $scope.totalRecepiesFound = 0;
+
+  $scope.getRecepiesFromIngredients = function(){
+    var req = {ingredients: []}
+
+    for(var k = 0; k < $scope.categories.length; k++){
+      req.ingredients = req.ingredients.concat($scope.categories[k].items.filter(function(item){
+        return item.toggle;
+      }));
+    }
+    var data = req.ingredients;
+    $http.post('/get_recipes', data).success(function (res) {
+
+      $scope.totalRecepiesFound = res.length;
+    })
+    console.log(req);
+    return []
+  }
+
+
   $http.get('/categories').success(function (response) {
     console.log("I got the data I requested", response);
-    $scope.categories = response;
+    $scope.categories = response.map(function(category){
+      category.items = category.items.map(function(ingredient){
+        ingredient.toggle = false;
+        return ingredient;
+      })
+      return category
+    });
+
+    console.log($scope.categories)
   })
 }
 

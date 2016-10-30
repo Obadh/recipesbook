@@ -60,8 +60,8 @@
               <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in category.items | filter:searching">
                 <label class="btn">
                   <div class="thumbnail">
-                    <img class="group list-group-image img-thumbnail img-check" ng-click="toggle = !toggle" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
-                    <input type="checkbox" name="food" id="myInput" value="[[item.name]]" class="hidden" autocomplete="off">
+                    <img class="group list-group-image img-thumbnail img-check" ng-click="item.toggle = !item.toggle; getRecepiesFromIngredients()" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
+                    <input type="checkbox" ng-checked="item.toggle" name="food" id="myInput" value="[[item.name]]" class="hidden" autocomplete="off">
                     <div class="caption">
                       <h4 class="group inner list-group-item-heading">[[item.name]]</h4>
                     </div>
@@ -70,7 +70,7 @@
               </div>
             </div>
             <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
-              Number of results:  <span class="badge">{{recipes.length}}</span>
+              Number of results:  <span class="badge">[[ totalRecepiesFound ]]</span>
             </button>
           </form>
         </div>
