@@ -80,6 +80,9 @@ router.post('/get_recipe', function(req, res, next) {
 
   var item = [];
     item = req.body.food;
+    if(typeof item === "undefined" || item.length === 0){
+      return res.redirect("/");
+    }
     //console.log(req.params,"this is params");
     //console.log(req, "request");
     if ( typeof item == "string" )
@@ -109,10 +112,10 @@ router.post('/get_recipe', function(req, res, next) {
                 // }
                 //var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
 
-                var found = true;
+                var found = false;
                 for (var i = 0; i < item2.length; i++) {
-                    if (item2.indexOf(item[i]) == -1) {
-                        found = false;
+                    if (item2.indexOf(item[i]) > -1) {
+                        found = true;
                         break;
                     }
                 }
@@ -121,10 +124,12 @@ router.post('/get_recipe', function(req, res, next) {
                 if (found == true) {
                   //console.log(found);
                   // var z=   recipesArray[x];
+
                   recipesArray2.push(recipesArray[x]);
+                  //console.log();
                 }
             }
-
+            console.log(recipesArray);
             res.render('get_recipe', {
                 recipes: recipesArray2
             });
