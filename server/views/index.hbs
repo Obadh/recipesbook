@@ -51,7 +51,7 @@
 
       <div class="container productsContainer" ng-controller="Appctrl">
         <div id="products" class="row list-group">
-          <form action="/get_recipes" method="post">
+          <form action="/get_recipe" method="post">
 
             <div ng-repeat="category in categories">
               <div class="clearfix"></div>
@@ -60,8 +60,8 @@
               <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in category.items | filter:searching">
                 <label class="btn">
                   <div class="thumbnail">
-                    <img class="group list-group-image img-thumbnail img-check" ng-click="item.toggle = !item.toggle; getRecepiesFromIngredients()" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
-                    <input type="checkbox" ng-checked="item.toggle" name="food" id="myInput" value="[[item.name]]" class="hidden" autocomplete="off">
+                    <img class="group list-group-image img-thumbnail img-check" ng-click="selectIngredients(item,$event)" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
+                    <input type="checkbox" ng-model="item.toggle" name="food" value="[[item.name]]" class="hidden" />
                     <div class="caption">
                       <h4 class="group inner list-group-item-heading">[[item.name]]</h4>
                     </div>
@@ -75,43 +75,6 @@
           </form>
         </div>
       </div>
-
-
-      <!-- <div ng-controller="Appctrll">
-        <div class="container" ng-repeat="recipe in recipes">
-          <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <h1>Name of recipes : [[recipe.name]]</h1>
-              <h3>Ingredients :  [[recipe.ingredients]]</h3>
-              <h4>Description :  [[recipe.description]]</h4>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <img  src="[[recipe.image]]" alt="User Pic" /> </br>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-        <!--
-
-        {{# each recipes }}
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <h1>Name of recipes : {{this.name}}</h1>
-              <h3>Ingredients :  {{this.ingredients}}</h3>
-              <h4>Description :  {{this.description}}</h4>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <img  src="{{ this.image }}" alt="User Pic" /> </br>
-            </div>
-          </div>
-        </div>
-
-
-      </br></br></br>
-        {{/each}}
- -->
 
 
 
