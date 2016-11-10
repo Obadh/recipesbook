@@ -1,0 +1,151 @@
+<header class="cd-header">
+		<a href="#0" class="cd-logo"><img src="images/logo.png" width="" height="" alt="Logo"></a>
+		<a href="#0" class="cd-3d-nav-trigger">
+			Menu
+			<span></span>
+		</a>
+	</header> <!-- .cd-header -->
+
+	<main>
+
+		<!-- all your content here -->
+	</main>
+
+	<nav class="cd-3d-nav-container">
+		<ul class="cd-3d-nav">
+			<!-- <li class="cd-selected">
+				<a href="#0">Home</a>
+			</li> -->
+
+			<li>
+				<a href="/">Home</a>
+			</li>
+
+			<!-- <li>
+				<a href="#0">Images</a>
+			</li> -->
+
+			<!-- <li>
+				<a href="#0">A</a>
+			</li> -->
+
+			<li>
+				<a href="/">AboutUs</a>
+			</li>
+		</ul> <!-- .cd-3d-nav -->
+
+		<span class="cd-marker color-1"></span>
+	</nav> <!-- .cd-3d-nav-container -->
+
+
+{{# each recipes }}
+<div class="container">
+  <div class="row descriptionClass">
+    <div class="col-sm-12">
+      <h1 id="recipeName" class="recipeName">{{this.name}}</h1>
+      <img  src="{{ this.image }}" alt="User Pic" width="100%" /> </br>
+      <br>
+    </div>
+    <div class="col-sm-12 ">
+      <h3>Ingredients : <span class="Ingredients"><strong>{{this.ingredients}}</strong></span></h3>
+      <br>
+      <h3>Description : <br><br>
+				<span class="description"><strong> {{this.description}}</strong></span></h3>
+    </div>
+
+  </div>
+</div>
+</br></br></br>
+{{/each}}
+
+
+      <!-- <div ng-controller="Appctrl">
+        <div class="container" ng-repeat="recipe in recipes">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <h1>Name of recipes : [[recipe.name]]</h1>
+              <h3>Ingredients :  [[recipe.ingredients]]</h3>
+              <h4>Description :  [[recipe.description]]</h4>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <img  src="[[recipe.image]]" alt="User Pic" /> </br>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+        <!--
+
+        {{# each recipes }}
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <h1>Name of recipes : {{this.name}}</h1>
+              <h3>Ingredients :  {{this.ingredients}}</h3>
+              <h4>Description :  {{this.description}}</h4>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <img  src="{{ this.image }}" alt="User Pic" /> </br>
+            </div>
+          </div>
+        </div>
+
+
+      </br></br></br>
+        {{/each}}
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 text-center">
+                    <br>
+                    <br>
+                    <h4>Copyright &copy; O.K Web Design 2016. All Rights Reserved</h4>
+                    <h4><a href="mailto:obadhh@gmail.com">Obadhh@gmail.com</a></h4>
+                </div><!-- end col-sm-10 -->
+
+
+
+                <div class="col-sm-2">
+                    <h5>Follow Us</h5>
+                    <ul class="unstyled">
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Google Plus</a></li>
+                    </ul>
+                </div><!-- end col-sm-2 -->
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </footer>
+</div> <!-- end container -->
+
+<!-- All Javascript at the bottom of the page for faster page loading -->
+<!-- First try for the online version of jQuery-->
+<script src="javascripts/main.js"></script>
+<!-- Bootstrap JS -->
+<script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom JS -->
+<script src="javascripts/js-index.js"></script>

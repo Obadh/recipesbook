@@ -1,82 +1,80 @@
-<div class="navbar navbar-inverse" id="nav-main">
-        <div class="container-fluid">
-          <div class="navbar-header">
-        <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </button>
+<header class="cd-header">
+		<a href="#0" class="cd-logo"><img src="images/logo.png" width="" height="" alt="Logo"></a>
+		<a href="#0" class="cd-3d-nav-trigger">
+			Menu
+			<span></span>
+		</a>
+	</header> <!-- .cd-header -->
 
-        <a class="navbar-brand" href="/"><img src="/recipesbook/images/logo.png" alt="my Logo" height="80" width="80"></a>
-      </div>
-        <div class="nav-collapse collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">AboutUs</a>
-                </li>
-            </ul>
-        </div><!-- end nav-collapse -->
-      </div>
-</div><!-- end navbar -->
+	<main>
 
-<div class="container ">
+		<!-- all your content here -->
+	</main>
 
+	<nav class="cd-3d-nav-container">
+		<ul class="cd-3d-nav">
+			<!-- <li class="cd-selected">
+				<a href="#0">Home</a>
+			</li> -->
 
+			<li>
+				<a href="/">Home</a>
+			</li>
 
-  <!-- <form>
-    <div center class="input-field">
-      <input id="search" type="text" data-ng-model="searching.title" required placeholder="Search...">
-      <label for="search"></label>
-    </div>
-  </form> -->
-        <form class="form-inline pull-right">
-            <input class="form-control" type="text" placeholder="Search">
-            <button class="btn btn-success-outline pull-right" type="submit">Search</button>
-        </form>
+			<!-- <li>
+				<a href="#0">Images</a>
+			</li> -->
 
+			<!-- <li>
+				<a href="#0">A</a>
+			</li> -->
 
-      </div>
+			<li>
+				<a href="/">AboutUs</a>
+			</li>
+		</ul> <!-- .cd-3d-nav -->
 
-      <div>
-  			<input ng-model="test">
-  			<h1>[[test]]</h1>
-  		</div>
+		<span class="cd-marker color-1"></span>
+	</nav> <!-- .cd-3d-nav-container -->
 
 
-
-        <div class="container productsContainer">
-                <div id="products" class="row list-group">
-                  <form action="#" method="get">
-                    {{# each categories }}
-                    <div class="clearfix"></div>
-                      <h1>{{this.name}}</h1>
-                      {{# each this.items }}
-                          <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                            <label class="btn">
-                              <div class="thumbnail">
-                                  <img class="group list-group-image img-thumbnail img-check" src="{{ this.image }}" alt="User Pic" />
-                                  <input type="checkbox" name="ingredients" id="{{ this.name }}" value="{{ this.name }}" class="hidden" autocomplete="off">
-                                  <div class="caption">
-                                      <h4 class="group inner list-group-item-heading">
-                                          {{ this.name }}</h4>
-                                  </div>
-                              </div>
-                            </label>
-                          </div>
-                        {{/each}}
-                    {{/each}}
-                    <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
-                      Number of results:  <span class="badge">100</span>
-                    </button>
-                    </form>
-                </div>
+        <div class="nav-wrapper container">
+          <form class="form-inline pull-right">
+            <div center class="input-field">
+              <input id="search" type="text" data-ng-model="searching.name" required placeholder="Search...">
+              <label for="search"></label>
+            </div>
+          </form>
         </div>
 
 
 
+      <div class="container productsContainer" ng-controller="Appctrl">
+        <div id="products" class="row list-group">
+          <form action="/get_recipe" method="post">
+						<div id="fixedRecipes"><div class="row"><div ng-repeat="recipe in totalRecepies" class="col-xs-12 col-sm-6 col-md-6 col-lg-3"><h5>[[recipe.name]]</h5><img height="100px" width="100px" ng-src="[[recipe.image]]" alt="User Pic" /></div></div></div>
+            <div ng-repeat="category in categories">
+              <div class="clearfix"></div>
+              <h1>[[category.name]]</h1>
+
+              <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in category.items | filter:searching">
+                <label class="btn">
+                  <div class="thumbnail">
+                    <img class="group list-group-image img-thumbnail img-check" ng-click="selectIngredients(item,$event)" ng-class="{'check' : item.toggle}" ng-src="[[item.image]]" alt="User Pic" />
+                    <input type="checkbox" ng-model="item.toggle" name="food" value="[[item.name]]" class="hidden" />
+                    <div class="caption">
+                      <h4 class="group inner list-group-item-heading">[[item.name]]</h4>
+                    </div>
+                 </div>
+                </label>
+              </div>
+            </div>
+            <button class="pull-left btn btn-primary" id="fixed-btn" type="submit">
+              Number of results:  <span class="badge">[[ totalRecepiesFound ]]</span>
+            </button>
+          </form>
+        </div>
+      </div>
 
 
 
@@ -108,10 +106,8 @@
 
     <!-- All Javascript at the bottom of the page for faster page loading -->
     <!-- First try for the online version of jQuery-->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <!-- If no online access, fallback to our hardcoded version of jQuery -->
-    <script>window.jQuery || document.write('<script src="/recipesbook/includes/js/jquery-1.8.2.min.js"><\/script>')</script>
+    <script src="javascripts/main.js"></script>
     <!-- Bootstrap JS -->
     <script src="/recipesbook/bootstrap/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
-    <script src="/recipesbook/includes/js/script.js"></script>
+    <script src="javascripts/js-index.js"></script>
