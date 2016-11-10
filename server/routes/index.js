@@ -112,13 +112,8 @@ router.post('/get_recipe', function(req, res, next) {
                 // }
                 //var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
 
-                var found = false;
-                for (var i = 0; i < item2.length; i++) {
-                    if (item2.indexOf(item[i]) > -1) {
-                        found = true;
-                        break;
-                    }
-                }
+
+                var found = item.every(function (val) { return item2.indexOf(val) >= 0; });
                 //console.log(found);
                 // y = arrayContainsArray(item, item2)
                 if (found == true) {

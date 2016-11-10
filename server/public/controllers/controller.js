@@ -20,7 +20,7 @@ function Appctrl($scope,$http) {
     }
     var data = req.ingredients;
     $http.post('/get_recipes', data).success(function (res) {
-
+      $scope.totalRecepies = res;
       $scope.totalRecepiesFound = res.length;
     })
     //console.log(req);
