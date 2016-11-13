@@ -1,6 +1,25 @@
 <!--<h1>{{title}}</h1>-->
 <!--<p>Welcome to {{title}}</p>-->
 
+
+
+<div class="container">
+  <div class="row">
+       <div class="col-lg-12">
+     <div class="button-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> <span class="caret"></span></button>
+<ul class="dropdown-menu">
+  {{# each items }}
+
+<li><a href="#" class="small" name="food" value="[[item.name]]" tabIndex="-1"><input type="checkbox"/>  {{ this.name }} </a></li>
+  {{/each}}
+</ul>
+  </div>
+</div>
+  </div>
+</div>
+
+
 <div class="form">
 
     <ul class="tab-group">
@@ -29,6 +48,15 @@
                     <textarea rows="4" cols="30" name="Descreption_recipes"> </textarea>
                 </div>
 
+
+
+
+
+
+
+
+
+
                 <div class="field-wrap field-wrap-2">
                     <label>
                         Ingredients<span class="req">*</span>
@@ -51,11 +79,22 @@
                     <input type="text"required autocomplete="off" name="Image_recipes"/>
                 </div>
 
+
+
+
+                <br/>
+
+
+
                 <input type="submit" value="Insert" class="button button-block" />
 
             </form>
 
         </div>
+
+
+
+
 
         <div id="addIngredient">
             <h1>Add Your Ingredient</h1>
@@ -97,30 +136,25 @@
 </div> <!-- /form -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="/javascripts/js_admin.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- {{# each items }}
-
-    <h3>{{ this.name }} </h3>
-
-    <h3>{{ this.cat }} </h3>
-
-    <img alt="User Pic" src="{{ this.pic }}" class="img-responsive">
-
-
-{{/each}} -->

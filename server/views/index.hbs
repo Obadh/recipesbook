@@ -51,7 +51,7 @@
 
       <div class="container productsContainer" ng-controller="Appctrl">
         <div id="products" class="row list-group">
-          <form action="/get_recipes" method="post">
+          <form action="/get_recipe" method="post">
 
             <div ng-repeat="category in categories">
               <div class="clearfix"></div>
@@ -61,7 +61,7 @@
                 <label class="btn">
                   <div class="thumbnail">
                     <img class="group list-group-image img-thumbnail img-check" ng-click="item.toggle = !item.toggle; getRecepiesFromIngredients()" ng-class="{'check' : toggle}" ng-src="[[item.image]]" alt="User Pic" />
-                    <input type="checkbox" ng-checked="item.toggle" name="food" id="myInput" value="[[item.name]]" class="hidden" autocomplete="off">
+                    <input type="checkbox" ng-checked="item.toggle" name="food" id="myInput" value="[[item.name]]"  autocomplete="off">
                     <div class="caption">
                       <h4 class="group inner list-group-item-heading">[[item.name]]</h4>
                     </div>
