@@ -76,79 +76,15 @@ router.get('/categories' , function (req,res,next) {
 
 
 
-
-router.post('/get_recipes', function(req, res, next) {
-  // var item = [];
-    var ingredientsNames= [];
-
-
-
-  console.log("ahmed");
-    for (var i=0; i<req.body.length; i++)
-    {
-      ingredientsNames.push(req.body[i].name);
-    }
-    console.log(ingredientsNames);
-   console.log(ingredientsNames.length);
-
-  //   if ( typeof item == "string" )
-  //   {
-  //    var item = item.split(" ");
-  //  }
-
-    var recipesArray = [];
-    var item2 = [];
-
-    mongo.connect(url, function(err, db) {
-        assert.equal(null, err);
-        var cursor = db.collection('recipes').find();
-        cursor.forEach(function(doc, err) {
-            assert.equal(null, err);
-            recipesArray.push(doc);
-        }, function() {
-            // for(int i=0; i<=recipesArray.length();i++){
-            //   console.log(recipesArray[i].ingredients);
-            // }
-              var recipesArray2 = [];
-            for (var x in recipesArray) {
-                item2 = recipesArray[x].ingredients;
-                // function arrayContainsArray(superset, subset) {
-                //     return superset.every(function(value) {
-                //         return (subset.indexOf(value) >= 0);
-                //     });
-                // }
-                   var isSuperset = ingredientsNames.every(function (val) { return item2.indexOf(val) >= 0; });
-                // y = arrayContainsArray(item, item2)
-
-                if (isSuperset === true) {
-                    console.log(isSuperset);
-                  // var z=   recipesArray[x];
-                   recipesArray2.push(recipesArray[x]);
-                }
-
-            }
-            var recipesArray2Number = recipesArray2.length ;
-            console.log(recipesArray2);
-            res.json(recipesArray2);
-            db.close();
-        });
-    });
-});
-
-
-
-
-
 router.post('/get_recipe', function(req, res, next) {
 
-
-    var item = [];
+  var item = [];
     item = req.body.food;
-
-    console.log("helloooo");
-
-    console.log(item);
-
+    if(typeof item === "undefined" || item.length === 0){
+      return res.redirect("/");
+    }
+    //console.log(req.params,"this is params");
+    //console.log(req, "request");
     if ( typeof item == "string" )
     {
      var item = item.split(" ");
@@ -156,62 +92,98 @@ router.post('/get_recipe', function(req, res, next) {
     var recipesArray = [];
     var item2 = [];
     var recipesArray2 = []
-
-
-
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
-
-
         var cursor = db.collection('recipes').find();
         cursor.forEach(function(doc, err) {
             assert.equal(null, err);
             recipesArray.push(doc);
-
         }, function() {
-
             // for(int i=0; i<=recipesArray.length();i++){
             //   console.log(recipesArray[i].ingredients);
             // }
             console.log(item);
-
             for (var x in recipesArray) {
                 item2 = recipesArray[x].ingredients;
-
                 // function arrayContainsArray(superset, subset) {
                 //     return superset.every(function(value) {
                 //         return (subset.indexOf(value) >= 0);
                 //     });
                 // }
+                //var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
 
 
-                   var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
-
-
+                var found = item.every(function (val) { return item2.indexOf(val) >= 0; });
+                //console.log(found);
                 // y = arrayContainsArray(item, item2)
-
-                if (isSuperset === true) {
-                    console.log(isSuperset);
+                if (found == true) {
+                  //console.log(found);
                   // var z=   recipesArray[x];
 
-                   recipesArray2.push(recipesArray[x]);
-
-
+                  recipesArray2.push(recipesArray[x]);
+                  //console.log();
                 }
-
             }
-
-            res.render('index', {
+            console.log(recipesArray);
+            res.render('get_recipe', {
                 recipes: recipesArray2
             });
-
             db.close();
-
-
-
         });
-
-
     });
+});
+router.post('/get_recipes', function(req, res, next) {
+  var item = [];
+  //item = req.body.food;
+  for (var i=0; i<req.body.length; i++)
+  {
+    item.push(req.body[i].name);
+  }
+  if ( typeof item == "string" )
+  {
+   var item = item.split(" ");
+ }
+
+  var recipesArray = [];
+  var item2 = [];
+  var recipesArray2 = []
+  mongo.connect(url, function(err, db) {
+      assert.equal(null, err);
+      var cursor = db.collection('recipes').find();
+      cursor.forEach(function(doc, err) {
+          assert.equal(null, err);
+          recipesArray.push(doc);
+      }, function() {
+          // for(int i=0; i<=recipesArray.length();i++){
+          //   console.log(recipesArray[i].ingredients);
+          // }
+          if (typeof item == undefined){
+            item=[];
+          }
+          console.log(item);
+          for (var x in recipesArray) {
+              item2 = recipesArray[x].ingredients;
+              // function arrayContainsArray(superset, subset) {
+              //     return superset.every(function(value) {
+              //         return (subset.indexOf(value) >= 0);
+              //     });
+              // }
+                 var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
+              // y = arrayContainsArray(item, item2)
+              if (isSuperset === true) {
+                  console.log(isSuperset);
+                // var z=   recipesArray[x];
+                 recipesArray2.push(recipesArray[x]);
+              }
+          }
+          res.json(recipesArray2);
+          db.close();
+      });
+  });
+
+
+
+
+
 
 });

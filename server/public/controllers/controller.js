@@ -1,6 +1,14 @@
 function Appctrl($scope,$http) {
   $scope.console = console.log;
   $scope.totalRecepiesFound = 0;
+  $scope.selectIngredients= function(item,$event){
+    $event.preventDefault();
+    $event.stopPropagation();
+    item.toggle = !item.toggle;
+    $scope.getRecepiesFromIngredients();
+    //$scope.$apply();
+    //console.log(item);
+  }
 
   $scope.getRecepiesFromIngredients = function(){
     var req = {ingredients: []}
@@ -12,27 +20,31 @@ function Appctrl($scope,$http) {
     }
     var data = req.ingredients;
     $http.post('/get_recipes', data).success(function (res) {
-
+      $scope.totalRecepies = res;
       $scope.totalRecepiesFound = res.length;
-      console.log(res);
     })
-    console.log(req);
+    //console.log(req);
     return []
   }
 
 
-  $http.get('/categories').success(function (response) {
-    console.log("I got the data I requested", response);
-    $scope.categories = response.map(function(category){
-      category.items = category.items.map(function(ingredient){
-        ingredient.toggle = false;
-        return ingredient;
-      })
-      return category
-    });
+  // $http.post('/get_recipes', $scope.recipesArray2).success(function (response) {
+  //
+  // })
 
-    console.log($scope.categories)
-  })
+
+$http.get('/categories').success(function (response) {
+  console.log("I got the data I requested", response);
+  $scope.categories = response.map(function(category){
+    category.items = category.items.map(function(ingredient){
+      ingredient.toggle = false;
+      return ingredient;
+    })
+    return category
+  });
+
+  console.log($scope.categories)
+})
 }
 
 

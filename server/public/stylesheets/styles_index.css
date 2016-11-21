@@ -7,6 +7,7 @@ footer {
 	font-size: 14px;
 	padding: 10px;
 	margin-top: 200px;
+	margin-bottom: 185px;
 }
 
 
@@ -14,10 +15,6 @@ footer {
    Typography
    -------------------------------------- */
 
-body {
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizelegibility;
-}
 
 .well .page-header {
 	margin-top: 0;
@@ -36,7 +33,6 @@ ul.unstyled {
 /* --------------------------------------
    Navbar
    -------------------------------------- */
-
 
 
 
@@ -60,18 +56,55 @@ img.list-group-image{
   opacity:0.5;
 	color:#996;
 }
+#fixedRecipes {
+	position: fixed;
+	bottom: 50px;
+	width: 100%;
+	left: 0;
+	height: 140px;
+	opacity: 0.8;
+	font-size: 2.4rem;
+	text-align: center;
+	z-index: 999;
+	background: #000;
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch; /* lets it scroll lazy */
+	-webkit-overflow-scrolling: auto; /* stop scrolling immediately */
+	overflow: hidden;
+}
 #fixed-btn {
-    position: fixed;
-    top: 18em;
-    left: 44% ;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	height: 50px;
+	opacity: 0.8;
+	font-size: 2rem;
+	padding-bottom: 5px;
+}
+button#fixed-btn:hover {
+    opacity: 1;
+}
+.badge{
+	font-size: 2.7rem;
+	background-color: #1572ca;
+}
+#recipeName{
+	margin-bottom: 40px;
+	text-align: center;
+}
+.descriptionClass{
+	border-radius: 25px;
+	border: 2px solid #00;
+	padding: 20px;
+	width: auto;
+	height: auto;
+	background: white;
 }
 #search{
-	margin-top: 70px;
+	margin-right: -20px;
 }
-body{
-	margin: 0px;
-	padding: 0px;
-}
+
 h1.ng-binding {
 	margin: 1em 0 0.5em 0;
 	font-weight: normal;
@@ -86,5 +119,4 @@ h1.ng-binding {
 	color: white;
 	border-radius: 0 10px 0 10px;
 	box-shadow: inset 0 0 5px rgba(53,86,129, 0.5);
-	font-family: 'Muli', sans-serif;
 }
