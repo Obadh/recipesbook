@@ -1,35 +1,34 @@
-var express = require('express');
-var app = express();
-var router = express.Router();
-var mongo = require('mongodb').MongoClient;
-var objectId = require('mongodb').ObjectID;
-var assert = require('assert');
-var bodyParser = require('body-parser');
+import express from 'express';
+const app = express();
+const router = express.Router();
+import {MongoClient as mongo} from 'mongodb';
+import {ObjectID as objectId} from 'mongodb';
+import assert from 'assert';
+import bodyParser from 'body-parser';
 
-
-
-var url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
+const url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook';
 
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' , layout: 'layout_admin' });
 // });
-
+//----------------------
+//exporting router functions to app.js
 module.exports = router;
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
 function getCategories(cb) {
-  var resultArray = [];
-  mongo.connect(url, function(err, db) {
+  let resultArray = [];
+  mongo.connect(url, (err, db) => {
       assert.equal(null, err);
-      var cursor = db.collection('ingredients').find();
+      let cursor = db.collection('ingredients').find();
       cursor.forEach(function(doc, err) {
           assert.equal(null, err);
           resultArray.push(doc);
-      }, function() {
+      }, ()=> {
           db.close();
-          var categories = [];
+          let categories = [];
           categories.push({
               category: 1,
               name: 'Vegetables',
@@ -52,15 +51,12 @@ function getCategories(cb) {
               })
           })
         cb(categories);
-
-
       });
   });
 }
 
 
-router.get('/', function(req, res, next) {
-  //res.json(categories);
+router.get('/', (req, res, next)=> {
   getCategories(function (categories) {
     res.render('index', {
         categories: categories
@@ -68,122 +64,61 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/categories' , function (req,res,next) {
+router.get('/categories' , (req,res,next)=> {
   getCategories(function (categories) {
     res.json(categories);
   });
 })
 
-
-
-router.post('/get_recipe', function(req, res, next) {
-
-  var item = [];
-    item = req.body.food;
-    if(typeof item === "undefined" || item.length === 0){
-      return res.redirect("/");
+function getRecipes(Ingrediants, res, cb) {
+    var selectedIngrediants = [];
+    var selectedIngrediantsFood = Ingrediants;
+    if (typeof selectedIngrediantsFood === 'string') {
+        selectedIngrediants.push(selectedIngrediantsFood);
+    } else {
+        selectedIngrediants = selectedIngrediantsFood;
     }
-    //console.log(req.params,"this is params");
-    //console.log(req, "request");
-    if ( typeof item == "string" )
-    {
-     var item = item.split(" ");
-   }
-    var recipesArray = [];
-    var item2 = [];
-    var recipesArray2 = []
+    var allRecipes = [];
+    var recipeIngrediants = [];
+    var selectedRecipes = []
     mongo.connect(url, function(err, db) {
         assert.equal(null, err);
         var cursor = db.collection('recipes').find();
         cursor.forEach(function(doc, err) {
             assert.equal(null, err);
-            recipesArray.push(doc);
+            allRecipes.push(doc);
         }, function() {
-            // for(int i=0; i<=recipesArray.length();i++){
-            //   console.log(recipesArray[i].ingredients);
-            // }
-            console.log(item);
-            for (var x in recipesArray) {
-                item2 = recipesArray[x].ingredients;
-                // function arrayContainsArray(superset, subset) {
-                //     return superset.every(function(value) {
-                //         return (subset.indexOf(value) >= 0);
-                //     });
-                // }
-                //var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
-
-
-                var found = item.every(function (val) { return item2.indexOf(val) >= 0; });
-                //console.log(found);
-                // y = arrayContainsArray(item, item2)
+            for (var x in allRecipes) {
+                recipeIngrediants = allRecipes[x].ingredients;
+                var found = selectedIngrediants.every(function(val) {
+                    return recipeIngrediants.indexOf(val) >= 0;
+                });
                 if (found == true) {
-                  //console.log(found);
-                  // var z=   recipesArray[x];
-
-                  recipesArray2.push(recipesArray[x]);
-                  //console.log();
+                    selectedRecipes.push(allRecipes[x]);
                 }
             }
-            console.log(recipesArray);
-            res.render('get_recipe', {
-                recipes: recipesArray2
-            });
+            cb(selectedRecipes);
             db.close();
         });
     });
-});
-router.post('/get_recipes', function(req, res, next) {
-  var item = [];
-  //item = req.body.food;
-  for (var i=0; i<req.body.length; i++)
-  {
-    item.push(req.body[i].name);
-  }
-  if ( typeof item == "string" )
-  {
-   var item = item.split(" ");
- }
+}
 
-  var recipesArray = [];
-  var item2 = [];
-  var recipesArray2 = []
-  mongo.connect(url, function(err, db) {
-      assert.equal(null, err);
-      var cursor = db.collection('recipes').find();
-      cursor.forEach(function(doc, err) {
-          assert.equal(null, err);
-          recipesArray.push(doc);
-      }, function() {
-          // for(int i=0; i<=recipesArray.length();i++){
-          //   console.log(recipesArray[i].ingredients);
-          // }
-          if (typeof item == undefined){
-            item=[];
-          }
-          console.log(item);
-          for (var x in recipesArray) {
-              item2 = recipesArray[x].ingredients;
-              // function arrayContainsArray(superset, subset) {
-              //     return superset.every(function(value) {
-              //         return (subset.indexOf(value) >= 0);
-              //     });
-              // }
-                 var isSuperset = item.every(function (val) { return item2.indexOf(val) >= 0; });
-              // y = arrayContainsArray(item, item2)
-              if (isSuperset === true) {
-                  console.log(isSuperset);
-                // var z=   recipesArray[x];
-                 recipesArray2.push(recipesArray[x]);
-              }
-          }
-          res.json(recipesArray2);
-          db.close();
-      });
+router.post('/get_recipe', (req, res, next) => {
+  let Ingrediants = req.body.food;
+  getRecipes(Ingrediants, res, function(selectedRecipes) {
+    res.render('get_recipe', {
+        recipes: selectedRecipes
+    });
   });
+});
 
-
-
-
-
-
+router.post('/get_recipes', (req, res, next) => {
+  let Ingrediants = [];
+  for (let i = 0; i < req.body.length; i++) {
+      Ingrediants.push(req.body[i].name);
+  }
+  getRecipes(Ingrediants, res, function(selectedRecipes) {
+    console.log(res);
+    res.json(selectedRecipes);
+  });
 });
