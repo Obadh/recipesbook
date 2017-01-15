@@ -1,40 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-
       <title>RecipesBook</title>
       <meta name="description" content="">
       <!-- Mobile viewport optimized -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
       <!-- Bootstrap CSS -->
-
-
       <link href="/recipesbook/bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <link href="/recipesbook/includes/css/bootstrap-glyphicons.css" rel="stylesheet">
-
       <!-- Include Modernizr in the head, before any other Javascript -->
       <script src="/recipesbook/includes/js/modernizr-2.6.2.min.js"></script>
-
-
       <link href="/stylesheets/styles_index.css" rel="stylesheet" >
-
-
-
       <!-- AngularJs -->
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
-
       <script>
       var myApp = angular.module('recepiebook', [], function($interpolateProvider) {
             $interpolateProvider.startSymbol('[[');
             $interpolateProvider.endSymbol(']]');
         });
       </script>
-
       <!-- App -->
       <script src="/controllers/controller.js"></script>
-
     </head>
     <body ng-app="recepiebook">
       {{{body}}}

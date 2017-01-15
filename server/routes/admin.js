@@ -7,20 +7,7 @@ const url = 'mongodb://recipesbookuser:12345@ds047666.mlab.com:47666/recipesbook
 
 module.exports = router;
 router.get('/', function (req, res, next) {
-  var resulIngredients = [];
-  mongo.connect(url, function (err, db) {
-    assert.equal(null, err);
-    var cursor = db.collection('ingredients').find();
-    cursor.forEach(function (doc, err) {
-      assert.equal(null, err);
-      resulIngredients.push(doc);
-    }, function () {
-      db.close();
-      res.render('admin', {items: resulIngredients, layout: 'layout_admin'});
-      console.log(resulIngredients[0].name);
-      console.log('erojkroegkgk');
-    });
-  });
+  res.render('admin', {layout: 'layout_admin'});
 });
 
 router.post('/recipe', function (req, res, next) {
